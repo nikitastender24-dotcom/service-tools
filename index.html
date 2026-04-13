@@ -2,52 +2,353 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Метеопортал · Доступные сервисы</title>
-    <!-- Страница БЕЗ CSS — только чистый HTML и inline-атрибуты (без style) -->
+    <style>
+        /* ---------- МИНИМАЛИЗМ · ЧЁРНО-БЕЛЫЙ · МИЛЛЕНИАЛ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 16px;
+            color: #000000;
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* главный контейнер — строго по центру, адаптивная ширина */
+        .portal {
+            max-width: 780px;
+            width: 100%;
+            text-align: center;
+            background: #ffffff;
+            border: 2px solid #000000;
+            padding: 2.2rem 1.8rem;
+            box-shadow: 8px 8px 0 #000000;
+            transition: box-shadow 0.15s ease;
+        }
+
+        h1 {
+            font-weight: 500;
+            font-size: clamp(1.8rem, 8vw, 2.8rem);
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 2.2rem;
+            word-break: break-word;
+        }
+
+        /* блок кнопок — колонка по центру */
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1.8rem;
+            width: 100%;
+        }
+
+        /* стиль кнопок — минимализм, ч/б, строгий */
+        .service-btn {
+            background: #ffffff;
+            border: 2px solid #000000;
+            color: #000000;
+            font-weight: 450;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.4rem;          /* базовый, будет переопределён ниже */
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            box-shadow: 5px 5px 0 #000000;
+            transition: all 0.1s ease-in;
+            font-family: inherit;
+            word-break: break-word;
+            white-space: normal;
+            -webkit-appearance: none;
+            appearance: none;
+            border-radius: 0;             /* острые углы — миллениал-вайб */
+            text-transform: none;
+        }
+
+        /* десктопный ховер (только для устройств с точным указателем) */
+        @media (hover: hover) {
+            .service-btn:hover {
+                background: #000000;
+                color: #ffffff;
+                box-shadow: 3px 3px 0 #333333;
+                transform: translate(1px, 1px);
+            }
+        }
+
+        /* активное нажатие — тактильная обратная связь */
+        .service-btn:active {
+            background: #000000;
+            color: #ffffff;
+            box-shadow: 1px 1px 0 #000000;
+            transform: translate(3px, 3px);
+        }
+
+        /* подвал — ультра-минимализм */
+        .portal-footer {
+            margin-top: 2.2rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #333;
+            border-top: 1px dashed #aaa;
+            padding-top: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* ---------- АДАПТАЦИЯ ПОД ТИП УСТРОЙСТВА (Device Type) ---------- */
+        /* Мобильные устройства (тачскрин + узкий экран) */
+        @media (max-width: 600px), (pointer: coarse) {
+            body {
+                padding: 12px;
+                justify-content: flex-start;   /* на мобилке чуть выше, чтобы не прилипало */
+                padding-top: 5vh;
+            }
+
+            .portal {
+                padding: 1.8rem 1rem;
+                box-shadow: 5px 5px 0 #000000;
+                border-width: 2px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1.8rem;
+            }
+
+            .button-stack {
+                gap: 1.5rem;
+            }
+
+            .service-btn {
+                font-size: 1.2rem;          /* читаемо, но не гигантское */
+                padding: 1rem 1rem;
+                box-shadow: 4px 4px 0 #000000;
+                /* увеличиваем область касания (min-height) */
+                min-height: 75px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* убираем эффекты наведения, оставляем только active */
+            .service-btn:hover {
+                background: #ffffff;
+                color: #000000;
+                box-shadow: 4px 4px 0 #000000;
+                transform: none;
+            }
+
+            .portal-footer {
+                margin-top: 1.8rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (iPhone SE 1gen и т.п.) */
+        @media (max-width: 380px) {
+            .service-btn {
+                font-size: 1.05rem;
+                padding: 0.9rem 0.8rem;
+                min-height: 70px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .portal {
+                padding: 1.3rem 0.8rem;
+            }
+        }
+
+        /* Планшеты и средние экраны — золотая середина */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .service-btn {
+                font-size: 1.4rem;
+                padding: 1.2rem 1.8rem;
+            }
+
+            .portal {
+                max-width: 680px;
+            }
+        }
+
+        /* Десктоп / широкие экраны — кнопки крупнее, но не раздутые */
+        @media (min-width: 901px) {
+            .service-btn {
+                font-size: 1.6rem;
+                padding: 1.5rem 2.2rem;
+            }
+
+            .portal {
+                padding: 2.5rem 2.5rem;
+            }
+        }
+
+        /* ДОПОЛНИТЕЛЬНО: определение устройства через JS (device-type класс) 
+           будет добавлять плавные адаптации, но основные уже в медиа.
+           Также сглаживаем редирект. */
+        .device-ios .service-btn,
+        .device-android .service-btn {
+            /* общие для мобильных ОС (на всякий) */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* для планшетов и десктопов убираем подсветку при тапе */
+        .service-btn:focus-visible {
+            outline: 3px solid #000;
+            outline-offset: 2px;
+        }
+
+        /* утилитарный класс для скрытия (не используется) */
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ЗАГОЛОВОК СВЕРХУ: «Доступные сервисы» -->
-    <h1 align="center">Доступные сервисы</h1>
+<div class="portal" id="meteoPortal">
+    <h1>Доступные сервисы</h1>
 
-    <!-- центрируем кнопки с помощью устаревшего, но рабочего HTML-тега <center> (никакого CSS) -->
-    <center>
-        <!-- ПЕРВАЯ БОЛЬШАЯ КНОПКА: Радар ДМРЛ -->
-        <!-- используем <button> + onclick для редиректа. Текст внутри — полное описание из задания -->
+    <div class="button-stack">
+        <!-- Кнопка 1: Радар ДМРЛ (редирект на исправленный URL, без двойного https) -->
         <button 
-            onclick="window.location.href='https://radar-production-7cff.up.railway.app/'" 
-            style="font-size: 2rem; padding: 1.2rem 3rem; margin: 20px; cursor: pointer;"
+            class="service-btn" 
+            onclick="window.location.href='https://radar-production-7cff.up.railway.app/'"
+            title="Радар ДМРЛ-С · Центральная Аэрологическая Обсерватория"
         >
-            Радар ДМРЛ, радарный комплекс ДМРЛ-С, Центральная Аэрологическая Обсерватория, ПАО «НПО Алмаз»
+            Радар ДМРЛ, радарный комплекс ДМРЛ-С,<br>Центральная Аэрологическая Обсерватория, ПАО «НПО Алмаз»
         </button>
 
-        <!-- пустая строка для визуального разделения (просто перевод строки) -->
-        <br>
-
-        <!-- ВТОРАЯ БОЛЬШАЯ КНОПКА: Грозопеленгация Vaisala (GLD360/NLDN) -->
+        <!-- Кнопка 2: Грозопеленгация Vaisala -->
         <button 
-            onclick="window.location.href='https://www.vaisala.com/ru/lp/gld360-nldn'" 
-            style="font-size: 2rem; padding: 1.2rem 3rem; margin: 20px; cursor: pointer;"
+            class="service-btn" 
+            onclick="window.location.href='https://www.vaisala.com/ru/lp/gld360-nldn'"
+            title="Глобальная сеть грозопеленгации GLD360 и NLDN"
         >
-            Грозопеленгация Vaisala (GLD360/NLDN)
+            Грозопеленгация Vaisala<br>(GLD360 / NLDN)
         </button>
-    </center>
+    </div>
 
-    <!-- 
-        Примечание: в задании указан редирект для радара на 
-        "https://https://radar-production-7cff.up.railway.app/"
-        в тексте двойной "https://". Исправляем на корректный URL:
-        https://radar-production-7cff.up.railway.app/
-        (так кнопка будет работать без ошибки)
-    -->
+    <div class="portal-footer">
+        <span id="deviceHint">⚡ ч/б миллениал · метеопортал</span>
+    </div>
+</div>
 
-    <!-- дополнительное пояснение внизу (необязательно, просто информативно) -->
-    <br><br>
-    <hr noshade size="1" width="80%">
-    <p align="center">
-        <small>Метеорологический портал · без CSS · только HTML-кнопки</small>
-    </p>
+<script>
+    (function() {
+        // -------------------------------------------------------------
+        // Проверка типа устройства и дополнительная адаптация (Device Type)
+        // Помимо CSS media queries, добавим классы к body и подсказку.
+        // -------------------------------------------------------------
+        
+        const ua = navigator.userAgent;
+        const body = document.body;
+        const hintSpan = document.getElementById('deviceHint');
+        
+        let deviceType = 'desktop';
+        let deviceClass = '';
 
+        // Определение мобильного / планшета / десктопа (простая эвристика)
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+        const isTablet = /iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk/i.test(ua) || 
+                         (/(iPad)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)); // iPadOS 13+
+        const isIOS = /iPhone|iPad|iPod/i.test(ua);
+        const isAndroid = /Android/i.test(ua);
+
+        // приоритет: если планшет, но всё равно тач
+        if (isTablet) {
+            deviceType = 'tablet';
+            deviceClass = 'device-tablet';
+        } else if (isMobile) {
+            deviceType = 'mobile';
+            deviceClass = 'device-mobile';
+        } else {
+            deviceType = 'desktop';
+            deviceClass = 'device-desktop';
+        }
+
+        // добавим ОС-специфичные классы (для кастомизации при необходимости)
+        if (isIOS) deviceClass += ' device-ios';
+        if (isAndroid) deviceClass += ' device-android';
+
+        body.classList.add(deviceClass.split(' ').filter(c => c).join(' '));
+
+        // Обновляем текст в футере (ненавязчиво показывает тип)
+        let deviceReadable = '';
+        if (deviceType === 'mobile') deviceReadable = '📱 mobile';
+        else if (deviceType === 'tablet') deviceReadable = '📲 tablet';
+        else deviceReadable = '🖥️ desktop';
+
+        if (hintSpan) {
+            hintSpan.innerHTML = `⚡ ${deviceReadable} · ч/б миллениал · метеопортал`;
+        }
+
+        // Дополнительная подстройка: если экран очень маленький, можем слегка 
+        // менять padding контейнера, но это уже делает CSS. 
+        // Однако добавим проверку ширины окна и добавим атрибут data-viewport 
+        // для возможного отслеживания (необязательно, но чисто демо адаптации).
+        function updateViewportIndicator() {
+            const w = window.innerWidth;
+            const portal = document.getElementById('meteoPortal');
+            if (!portal) return;
+            if (w <= 480) {
+                portal.setAttribute('data-viewport', 'small');
+            } else if (w <= 768) {
+                portal.setAttribute('data-viewport', 'medium');
+            } else {
+                portal.setAttribute('data-viewport', 'large');
+            }
+        }
+
+        window.addEventListener('resize', updateViewportIndicator);
+        updateViewportIndicator();
+
+        // Также добавим обработку редиректа через кнопки для отлова ошибок
+        // если вдруг URL битый — предупредим (но всё должно работать).
+        const buttons = document.querySelectorAll('.service-btn');
+        buttons.forEach((btn, index) => {
+            btn.addEventListener('click', function(e) {
+                // на случай если атрибут onclick сработал, но можно добавить логирование
+                // console.log(`Переход на сервис ${index+1}`);
+                // ничего не ломаем
+            });
+        });
+
+        // Исправление двойного https, если вдруг пользователь вставил вручную, 
+        // но в кнопке уже правильный URL. Для спокойствия проверим.
+        // (не требуется)
+    })();
+</script>
+
+<!-- 
+    ПРИМЕЧАНИЯ:
+    - Первая кнопка ведёт на https://radar-production-7cff.up.railway.app/ (без дубляжа https://https://)
+    - Вторая — на официальную страницу Vaisala GLD360/NLDN.
+    - Адаптивный дизайн: на мобильных кнопки уменьшаются, увеличивается тач-зона,
+      на десктопе крупный шрифт и строгие чёрные рамки.
+    - Миллениал-стиль: ч/б палитра, тени, острые углы, шрифт без засечек.
+    - Device Type определяется и отображается в футере.
+-->
 </body>
 </html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Метеопортал · Доступные сервисы</title>
     <style>
-        /* ---------- СОВРЕМЕННЫЙ МИНИМАЛИЗМ · Ч/Б · АДАПТИВ ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -130,21 +129,11 @@
 
         .footer {
             margin-top: 48px;
-            color: #999;
-            font-size: 0.8rem;
-            font-weight: 350;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        #device-indicator {
-            display: inline-block;
-            background: #ececec;
-            padding: 6px 16px;
-            border-radius: 40px;
+            color: #aaa;
             font-size: 0.75rem;
-            color: #555;
-            margin-top: 12px;
+            font-weight: 350;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* ---------- АДАПТАЦИЯ ПОД ТИП УСТРОЙСТВА ---------- */
@@ -212,7 +201,6 @@
             }
         }
 
-        /* Убираем ховер-эффекты на устройствах без точного указателя */
         @media (hover: hover) {
             .service-card:hover {
                 border-color: #1a1a1a;
@@ -221,13 +209,11 @@
             }
         }
 
-        /* Фокус для доступности */
         .service-card:focus-visible {
             outline: 3px solid #1a1a1a;
             outline-offset: 3px;
         }
 
-        /* Классы, добавляемые JS для device-type */
         body.device-mobile .service-card:hover {
             transform: none;
         }
@@ -278,22 +264,36 @@
                 </div>
             </div>
         </a>
+
+        <!-- Карточка 3: Метеорологическая модель -->
+        <a class="service-card" 
+           href="https://model-mdl.onrender.com/index.html" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           onclick="handleNavigation(event, 'model')">
+            <div class="card-content">
+                <div class="service-title">Метеорологическая модель</div>
+                <div class="service-subtitle">
+                    Расчёт возможности возникновения атмосферных явлений по метеорологическим параметрам. Конвертеры метеорологических значений
+                </div>
+                <div class="service-meta">
+                    <span class="badge">прогностическая модель</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+        </a>
     </div>
 
     <div class="footer">
         метеорологический портал
-        <div id="device-indicator">определение устройства...</div>
     </div>
 </div>
 
 <script>
     (function() {
-        // ---------- ОПРЕДЕЛЕНИЕ ТИПА УСТРОЙСТВА И АДАПТАЦИЯ ----------
         const ua = navigator.userAgent;
         const body = document.body;
-        const indicator = document.getElementById('device-indicator');
         
-        // Определяем тип
         const isMobile = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
         const isTablet = /iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk|Kindle|Nexus 7|Nexus 10|KFAPWI/i.test(ua) || 
                          (/(iPad)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
@@ -301,62 +301,29 @@
         const isAndroid = /Android/i.test(ua);
         
         let deviceType = 'desktop';
-        let deviceName = 'Desktop';
         
         if (isTablet) {
             deviceType = 'tablet';
-            deviceName = 'Tablet';
             body.classList.add('device-tablet');
         } else if (isMobile) {
             deviceType = 'mobile';
-            deviceName = 'Mobile';
             body.classList.add('device-mobile');
         } else {
             deviceType = 'desktop';
-            deviceName = 'Desktop';
             body.classList.add('device-desktop');
         }
         
         if (isIOS) body.classList.add('device-ios');
         if (isAndroid) body.classList.add('device-android');
         
-        // Обновляем индикатор в футере
-        if (indicator) {
-            const width = window.innerWidth;
-            let screenInfo = '';
-            if (width < 400) screenInfo = ' (компакт)';
-            else if (width < 768) screenInfo = ' (средний)';
-            else screenInfo = ' (широкий)';
-            
-            indicator.textContent = `${deviceName} · ${width}px${screenInfo}`;
-        }
-        
-        // Дополнительная адаптация: при ресайзе обновляем подсказку
-        window.addEventListener('resize', function() {
-            if (indicator) {
-                const w = window.innerWidth;
-                let screenInfo = '';
-                if (w < 400) screenInfo = ' (компакт)';
-                else if (w < 768) screenInfo = ' (средний)';
-                else screenInfo = ' (широкий)';
-                indicator.textContent = `${deviceName} · ${w}px${screenInfo}`;
-            }
-        });
-        
-        // Обработчик навигации (для аналитики/логирования, не мешает переходу)
         window.handleNavigation = function(event, service) {
-            // Можно добавить легкий фидбек, не блокируем переход
             const card = event.currentTarget;
             card.style.opacity = '0.85';
             setTimeout(() => { card.style.opacity = ''; }, 150);
             
-            // Дополнительно: если нужно логировать переходы
             console.log(`[Метеопортал] Переход на сервис: ${service} (${deviceType})`);
-            
-            // Не предотвращаем стандартное поведение — ссылка отработает
         };
         
-        // Улучшаем поведение для тач-устройств: убираем ховер-эффекты навсегда
         if (deviceType === 'mobile' || deviceType === 'tablet') {
             const style = document.createElement('style');
             style.textContent = `
@@ -373,14 +340,12 @@
             document.head.appendChild(style);
         }
 
-        // Устанавливаем правильный viewport для очень маленьких экранов (доп. контроль)
         if (window.innerWidth < 380) {
             body.style.padding = '12px';
         }
     })();
 </script>
 
-<!-- Гарантируем, что при клике переход происходит даже если JS отключен -->
 <noscript>
     <style>
         .service-card { cursor: pointer; }

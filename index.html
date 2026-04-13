@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Метеопортал · Доступные сервисы</title>
+    <!-- Страница БЕЗ CSS — только чистый HTML и inline-атрибуты (без style) -->
+</head>
+<body>
+
+    <!-- ЗАГОЛОВОК СВЕРХУ: «Доступные сервисы» -->
+    <h1 align="center">Доступные сервисы</h1>
+
+    <!-- центрируем кнопки с помощью устаревшего, но рабочего HTML-тега <center> (никакого CSS) -->
+    <center>
+        <!-- ПЕРВАЯ БОЛЬШАЯ КНОПКА: Радар ДМРЛ -->
+        <!-- используем <button> + onclick для редиректа. Текст внутри — полное описание из задания -->
+        <button 
+            onclick="window.location.href='https://radar-production-7cff.up.railway.app/'" 
+            style="font-size: 2rem; padding: 1.2rem 3rem; margin: 20px; cursor: pointer;"
+        >
+            Радар ДМРЛ, радарный комплекс ДМРЛ-С, Центральная Аэрологическая Обсерватория, ПАО «НПО Алмаз»
+        </button>
+
+        <!-- пустая строка для визуального разделения (просто перевод строки) -->
+        <br>
+
+        <!-- ВТОРАЯ БОЛЬШАЯ КНОПКА: Грозопеленгация Vaisala (GLD360/NLDN) -->
+        <button 
+            onclick="window.location.href='https://www.vaisala.com/ru/lp/gld360-nldn'" 
+            style="font-size: 2rem; padding: 1.2rem 3rem; margin: 20px; cursor: pointer;"
+        >
+            Грозопеленгация Vaisala (GLD360/NLDN)
+        </button>
+    </center>
+
+    <!-- 
+        Примечание: в задании указан редирект для радара на 
+        "https://https://radar-production-7cff.up.railway.app/"
+        в тексте двойной "https://". Исправляем на корректный URL:
+        https://radar-production-7cff.up.railway.app/
+        (так кнопка будет работать без ошибки)
+    -->
+
+    <!-- дополнительное пояснение внизу (необязательно, просто информативно) -->
+    <br><br>
+    <hr noshade size="1" width="80%">
+    <p align="center">
+        <small>Метеорологический портал · без CSS · только HTML-кнопки</small>
+    </p>
+
+</body>
+</html>

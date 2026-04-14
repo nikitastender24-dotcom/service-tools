@@ -8,23 +8,20 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Метеопортал">
     <meta property="og:title" content="Метеопортал · Доступные сервисы">
-    <meta property="og:description" content="Радар ДМРЛ-С, грозопеленгация Vaisala, прогностическая модель и карта радаров NEXRAD. Оперативные метеорологические данные">
+    <meta property="og:description" content="Радар ДМРЛ-С, грозопеленгация Vaisala, прогностическая модель, карта NEXRAD и статичные снимки радаров Казахстана. Оперативные метеорологические данные">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4149/4149683.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta property="og:image:alt" content="Метеопортал иконка">
     <meta property="og:url" content="https://meteoportal.example.com">
     
-    <!-- Twitter Card (для совместимости) -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Метеопортал · Доступные сервисы">
-    <meta name="twitter:description" content="Радар ДМРЛ-С, грозопеленгация Vaisala, метеомодель, карта NEXRAD">
+    <meta name="twitter:description" content="Радар ДМРЛ-С, Vaisala, метеомодель, NEXRAD, радары KZ">
     <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/4149/4149683.png">
     
-    <!-- Обычное описание для поисковиков -->
-    <meta name="description" content="Метеорологический портал с доступом к радару ДМРЛ-С, грозопеленгации Vaisala GLD360/NLDN, прогностической модели атмосферных явлений и интерактивной карте радаров NEXRAD.">
-    
-    <!-- Цвет темы (для мобильных браузеров) -->
+    <meta name="description" content="Метеорологический портал с доступом к радару ДМРЛ-С, грозопеленгации Vaisala, прогностической модели, карте NEXRAD и статичным изображениям радаров Казахстана.">
     <meta name="theme-color" content="#fafafa">
     
     <title>Метеопортал · Доступные сервисы</title>
@@ -161,7 +158,7 @@
             text-transform: uppercase;
         }
 
-        /* ---------- АДАПТАЦИЯ ПОД ТИП УСТРОЙСТВА ---------- */
+        /* ---------- АДАПТАЦИЯ ---------- */
         @media (max-width: 600px), (pointer: coarse) {
             body {
                 padding: 16px;
@@ -242,10 +239,6 @@
         body.device-mobile .service-card:hover {
             transform: none;
         }
-
-        body.device-tablet .service-card:hover {
-            transform: translateY(-1px);
-        }
     </style>
 </head>
 <body>
@@ -254,7 +247,7 @@
     <h1>Доступные сервисы</h1>
 
     <div class="services">
-        <!-- Карточка 1: Радар ДМРЛ -->
+        <!-- 1. Радар ДМРЛ -->
         <a class="service-card" 
            href="https://radar-production-7cff.up.railway.app/" 
            target="_blank" 
@@ -272,7 +265,7 @@
             </div>
         </a>
 
-        <!-- Карточка 2: Грозопеленгация Vaisala -->
+        <!-- 2. Грозопеленгация Vaisala -->
         <a class="service-card" 
            href="https://vaisala-production.up.railway.app/" 
            target="_blank" 
@@ -290,7 +283,7 @@
             </div>
         </a>
 
-        <!-- Карточка 3: Метеорологическая модель -->
+        <!-- 3. Метеорологическая модель -->
         <a class="service-card" 
            href="https://model-mdl.onrender.com/index.html" 
            target="_blank" 
@@ -308,7 +301,7 @@
             </div>
         </a>
 
-        <!-- Карточка 4: Интерактивная карта NEXRAD (НОВАЯ) -->
+        <!-- 4. Карта радаров NEXRAD -->
         <a class="service-card" 
            href="https://noaa-radar.onrender.com/" 
            target="_blank" 
@@ -321,6 +314,24 @@
                 </div>
                 <div class="service-meta">
                     <span class="badge">радарная сеть</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 5. Статичное изображение ДМРЛ KZ (НОВАЯ КАРТОЧКА) -->
+        <a class="service-card" 
+           href="https://kaz-radar.onrender.com/" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           onclick="handleNavigation(event, 'kaz-radar')">
+            <div class="card-content">
+                <div class="service-title">Статичное изображение ДМРЛ KZ</div>
+                <div class="service-subtitle">
+                    Статичные изображения радаров Казахстана в мм/ч. Торгай, Балхаш, Талдыкорган — актуальные снимки отражаемости
+                </div>
+                <div class="service-meta">
+                    <span class="badge">радары KZ</span>
                     <span class="arrow">→</span>
                 </div>
             </div>
@@ -363,7 +374,6 @@
             const card = event.currentTarget;
             card.style.opacity = '0.85';
             setTimeout(() => { card.style.opacity = ''; }, 150);
-            
             console.log(`[Метеопортал] Переход на сервис: ${service} (${deviceType})`);
         };
         

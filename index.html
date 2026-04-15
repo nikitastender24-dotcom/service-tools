@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     
-    <!-- ---------- OPEN GRAPH / ПРЕДПРОСМОТР ДЛЯ TELEGRAM И СОЦСЕТЕЙ ---------- -->
+    <!-- OPEN GRAPH / ПРЕДПРОСМОТР ДЛЯ TELEGRAM -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Метеопортал">
     <meta property="og:title" content="Метеопортал · Доступные сервисы">
-    <meta property="og:description" content="Радар ДМРЛ-С, грозопеленгация Vaisala, прогностическая модель, карта NEXRAD и статичные снимки радаров Казахстана. Оперативные метеорологические данные">
+    <meta property="og:description" content="Радар ДМРЛ-С, Vaisala, прогностическая модель, NEXRAD, радары KZ, данные метеостанций мира. Оперативная метеоинформация">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4149/4149683.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
-    <meta property="og:image:alt" content="Метеопортал иконка">
+    <meta property="og:image:alt" content="Метеопортал">
     <meta property="og:url" content="https://meteoportal.example.com">
     
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Метеопортал · Доступные сервисы">
-    <meta name="twitter:description" content="Радар ДМРЛ-С, Vaisala, метеомодель, NEXRAD, радары KZ">
+    <meta name="twitter:description" content="Радар ДМРЛ-С, Vaisala, модель, NEXRAD, радары KZ, метеостанции мира">
     <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/4149/4149683.png">
     
-    <meta name="description" content="Метеорологический портал с доступом к радару ДМРЛ-С, грозопеленгации Vaisala, прогностической модели, карте NEXRAD и статичным изображениям радаров Казахстана.">
+    <meta name="description" content="Метеорологический портал с доступом к радару ДМРЛ-С, грозопеленгации Vaisala, прогностической модели, карте NEXRAD, радарам Казахстана и данным метеостанций мира.">
     <meta name="theme-color" content="#fafafa">
     
     <title>Метеопортал · Доступные сервисы</title>
@@ -158,7 +157,7 @@
             text-transform: uppercase;
         }
 
-        /* ---------- АДАПТАЦИЯ ---------- */
+        /* АДАПТАЦИЯ */
         @media (max-width: 600px), (pointer: coarse) {
             body {
                 padding: 16px;
@@ -319,7 +318,7 @@
             </div>
         </a>
 
-        <!-- 5. Статичное изображение ДМРЛ KZ (НОВАЯ КАРТОЧКА) -->
+        <!-- 5. Статичное изображение ДМРЛ KZ -->
         <a class="service-card" 
            href="https://kaz-radar.onrender.com/" 
            target="_blank" 
@@ -332,6 +331,24 @@
                 </div>
                 <div class="service-meta">
                     <span class="badge">радары KZ</span>
+                    <span class="arrow">→</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- 6. Данные по метеостанциям со всего мира (НОВАЯ) -->
+        <a class="service-card" 
+           href="https://station-data-production.up.railway.app/" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           onclick="handleNavigation(event, 'stations')">
+            <div class="card-content">
+                <div class="service-title">Данные по метеостанциям со всего мира</div>
+                <div class="service-subtitle">
+                    Фактические данные с метеостанций со всего мира: температура, ветер, направление ветра, точка росы, атмосферное давление
+                </div>
+                <div class="service-meta">
+                    <span class="badge">наблюдения</span>
                     <span class="arrow">→</span>
                 </div>
             </div>

@@ -241,7 +241,15 @@
     </style>
 </head>
 <body>
-
+    
+<!-- === ПРОВЕРКА АВТОРИЗАЦИИ (ДОБАВЛЕНО ТОЛЬКО ЭТО) === -->
+<script type="text/javascript">
+    if (sessionStorage.getItem('auth') !== 'ok') {
+        window.location.href = 'login.html';
+    }
+</script>
+    <!-- === КОНЕЦ ПРОВЕРКИ === -->
+    
 <div class="container">
     <h1>Доступные сервисы</h1>
 

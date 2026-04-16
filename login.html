@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Verdana', sans-serif;
+            height: 100vh;
+            background: #000; /* fallback */
+        }
+
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #login-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            backdrop-filter: blur(2px);
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .login-card {
+            width: 500px;
+            padding: 30px 20px;
+            background: rgba(20, 30, 50, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h3 {
+            font-family: 'Verdana', sans-serif;
+            font-weight: 400;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .login-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .login-table td {
+            padding: 8px 5px;
+            vertical-align: middle;
+        }
+
+        .icon-cell {
+            width: 100px;
+            text-align: right;
+            padding-right: 20px;
+        }
+
+        .icon-cell img {
+            width: 96px;
+            height: 96px;
+            border: 1px solid white;
+            border-radius: 4px;
+        }
+
+        .label-cell {
+            text-align: right;
+            color: white;
+            font-size: 14px;
+            width: 120px;
+        }
+
+        .input-cell {
+            text-align: left;
+        }
+
+        .input-cell input {
+            width: 200px;
+            padding: 8px 10px;
+            font-size: 14px;
+            border: 1px solid #4a6a8b;
+            background: #1e2a3a;
+            color: white;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .input-cell input:focus {
+            border-color: #5b9bd5;
+            background: #1e2a3a;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        .button-cell {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .login-btn {
+            width: 150px;
+            padding: 10px 20px;
+            background: #2a4a6a;
+            border: 1px solid #3a6a9a;
+            color: white;
+            font-size: 16px;
+            font-family: 'Segoe UI', sans-serif;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #3a6a9a;
+        }
+
+        .required-star {
+            color: red;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 550px) {
+            .login-card {
+                width: 90%;
+                padding: 20px 10px;
+            }
+            .input-cell input {
+                width: 100%;
+                min-width: 150px;
+            }
+            .icon-cell {
+                width: auto;
+                padding-right: 10px;
+            }
+            .icon-cell img {
+                width: 64px;
+                height: 64px;
+            }
+            .label-cell {
+                width: auto;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="background">
+    <img src="img/logonui.jpg" alt="background">
+</div>
+
+<div id="login-container">
+    <div class="login-card">
+        <h3>Страница Авторизации</h3>
+        
+        <table class="login-table">
+            <tr>
+                <td class="icon-cell" rowspan="3">
+                    <img src="img/128logon.png" alt="lock">
+                </td>
+                <td colspan="2">
+                    <div id="errorMsg" class="error-message"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="label-cell">
+                    <span class="required-star">*</span> Введите логин
+                </td>
+                <td class="input-cell">
+                    <input type="text" id="username" placeholder="логин" autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <td class="label-cell">
+                    <span class="required-star">*</span> Введите пароль
+                </td>
+                <td class="input-cell">
+                    <input type="password" id="password" placeholder="пароль">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="button-cell">
+                    <button class="login-btn" id="loginBtn">Вход в систему</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ===== НАСТРОЙКИ =====
+        const VALID_USERNAME = 'admin';
+        const VALID_PASSWORD = 'meteo2024';
+        const REDIRECT_URL = 'index.html';  // куда идти после входа
+        
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Проверка, уже залогинены ли мы
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            window.location.href = REDIRECT_URL;
+        }
+
+        function attemptLogin() {
+            const user = usernameInput.value.trim();
+            const pass = passwordInput.value;
+            
+            if (user === VALID_USERNAME && pass === VALID_PASSWORD) {
+                sessionStorage.setItem('authenticated', 'true');
+                window.location.href = REDIRECT_URL;
+            } else {
+                errorMsg.textContent = 'Неверный логин или пароль';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        loginBtn.addEventListener('click', attemptLogin);
+        
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                attemptLogin();
+            }
+        });
+        
+        usernameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                passwordInput.focus();
+            }
+        });
+
+        // Фокус на поле логина при загрузке
+        usernameInput.focus();
+    })();
+</script>
+
+</body>
+</html>

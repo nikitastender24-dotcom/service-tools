@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     
-    <!-- OPEN GRAPH / ПРЕДПРОСМОТР ДЛЯ TELEGRAM -->
+    <!-- OPEN GRAPH / ПРЕДПРОСМОТР -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Метеопортал">
     <meta property="og:title" content="Метеопортал · Доступные сервисы">
-    <meta property="og:description" content="Радар ДМРЛ-С, Vaisala, прогностическая модель, NEXRAD, радары KZ, данные метеостанций мира. Оперативная метеоинформация">
+    <meta property="og:description" content="Радар ДМРЛ-С, Vaisala, прогностическая модель, NEXRAD, радары KZ, данные метеостанций мира. Офисный стиль 2010 Blue">
     <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4149/4149683.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
@@ -21,11 +21,12 @@
     <meta name="twitter:image" content="https://cdn-icons-png.flaticon.com/512/4149/4149683.png">
     
     <meta name="description" content="Метеорологический портал с доступом к радару ДМРЛ-С, грозопеленгации Vaisala, прогностической модели, карте NEXRAD, радарам Казахстана и данным метеостанций мира.">
-    <meta name="theme-color" content="#fafafa">
+    <meta name="theme-color" content="#cfddee">
     
-    <title>Метеопортал · Доступные сервисы</title>
+    <title>Метеопортал · Доступные сервисы (Office 2010 Blue)</title>
     
     <style>
+        /* ---------- OFFICE 2010 BLUE STYLE ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -33,224 +34,231 @@
         }
 
         body {
-            background: #fafafa;
+            background: #f1f5fb; /* мягкий фон страницы */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            padding: 24px;
-            color: #1a1a1a;
-            line-height: 1.5;
+            font-family: 'Verdana', 'Tahoma', sans-serif;
+            padding: 20px;
+            color: #1e395b;
+            line-height: 1.4;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        .container {
-            max-width: 720px;
+        .portal-container {
+            max-width: 780px;
             width: 100%;
-            text-align: center;
+            background: #cfddee;  /* основной фон панели */
+            border: 1px solid #8ba0bc;
+            padding: 24px 20px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         h1 {
-            font-weight: 350;
-            font-size: clamp(2rem, 7vw, 3rem);
-            letter-spacing: -0.02em;
-            margin-bottom: 48px;
-            color: #111;
-            word-break: break-word;
+            font-weight: normal;
+            font-size: 22px;
+            color: #1e395b;
+            background: #e4effb url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="%23f9fcff"/><stop offset="1" stop-color="%23d9e6f2"/></linearGradient><rect width="100%" height="100%" fill="url(#g)"/></svg>') repeat-x left top;
+            border-bottom: 1px solid #8ba0bc;
+            padding: 12px 18px;
+            margin: -24px -20px 20px -20px;  /* растягиваем на всю ширину контейнера */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .services {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             width: 100%;
         }
 
+        /* Карточка сервиса в стиле панели Office 2010 */
         .service-card {
             display: block;
             width: 100%;
             background: #ffffff;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 20px;
-            padding: 0;
+            border: 1px solid #8ba0bc;
+            padding: 18px 22px;
             text-decoration: none;
-            color: #1a1a1a;
-            transition: all 0.25s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            color: #1e395b;
+            transition: all 0.15s ease;
+            box-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgba(0,0,0,0.05);
             cursor: pointer;
             text-align: left;
             -webkit-tap-highlight-color: transparent;
+            /* убираем скругления — в офисе 2010 минимальные */
+            border-radius: 0;
         }
 
+        /* эффект при наведении как у dxbButtonHover */
         .service-card:hover {
-            border-color: #1a1a1a;
-            background: #ffffff;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            transform: translateY(-2px);
+            border-color: #eecc53;
+            background: #fcf8e5;
+            box-shadow: inset 0 1px 0 #fffde7, 0 2px 4px rgba(0,0,0,0.08);
+            color: #1e395b;
         }
 
+        /* эффект нажатия как dxbButtonPressed */
         .service-card:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-            border-color: #1a1a1a;
-        }
-
-        .card-content {
-            padding: 28px 32px;
+            border-color: #c2762b;
+            background: #fee287;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .service-title {
-            font-size: 1.6rem;
-            font-weight: 450;
-            letter-spacing: -0.01em;
-            margin-bottom: 8px;
-            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e395b;
+            margin-bottom: 6px;
         }
 
         .service-subtitle {
-            font-size: 1rem;
-            font-weight: 380;
-            color: #666;
-            line-height: 1.5;
+            font-size: 12px;
+            color: #2b4a6e;
+            line-height: 1.4;
         }
 
         .service-meta {
-            margin-top: 16px;
+            margin-top: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 0.9rem;
-            color: #888;
+            gap: 10px;
+            font-size: 11px;
+            color: #566b84;
+            border-top: 1px dotted #b7c8dd;
+            padding-top: 10px;
         }
 
         .badge {
-            background: #f0f0f0;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 450;
-            color: #333;
+            background: #d1dfef;
+            border: 1px solid #8ba0bc;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: normal;
+            color: #1e395b;
+            text-transform: uppercase;
             letter-spacing: 0.3px;
+            border-radius: 0;
+            box-shadow: inset 0 1px 0 #ffffff;
         }
 
         .arrow {
             margin-left: auto;
-            font-size: 1.2rem;
-            opacity: 0.6;
-            transition: opacity 0.2s, transform 0.2s;
+            font-size: 14px;
+            font-weight: bold;
+            color: #1e395b;
+            opacity: 0.8;
+            transition: transform 0.1s;
         }
 
         .service-card:hover .arrow {
             opacity: 1;
-            transform: translateX(4px);
+            transform: translateX(3px);
         }
 
         .footer {
-            margin-top: 48px;
-            color: #aaa;
-            font-size: 0.75rem;
-            font-weight: 350;
-            letter-spacing: 1px;
+            margin-top: 28px;
+            text-align: center;
+            color: #1e395b;
+            font-size: 10px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 1px solid #8ba0bc;
+            padding-top: 14px;
+            background: transparent;
         }
 
-        /* АДАПТАЦИЯ */
+        /* АДАПТАЦИЯ ПОД УСТРОЙСТВА (сохраняем офисный стиль) */
         @media (max-width: 600px), (pointer: coarse) {
             body {
-                padding: 16px;
+                padding: 12px;
                 justify-content: flex-start;
-                padding-top: 6vh;
+                padding-top: 4vh;
+            }
+
+            .portal-container {
+                padding: 18px 12px 12px;
             }
 
             h1 {
-                margin-bottom: 32px;
-                font-size: 2.2rem;
+                font-size: 18px;
+                padding: 10px 12px;
+                margin: -18px -12px 16px -12px;
             }
 
             .services {
-                gap: 16px;
+                gap: 14px;
             }
 
-            .card-content {
-                padding: 22px 20px;
+            .service-card {
+                padding: 14px 16px;
             }
 
             .service-title {
-                font-size: 1.4rem;
+                font-size: 15px;
             }
 
             .service-subtitle {
-                font-size: 0.95rem;
+                font-size: 11px;
             }
 
             .service-card:hover {
-                transform: none;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-                border-color: #e0e0e0;
+                background: #ffffff;
+                border-color: #8ba0bc;
+                box-shadow: inset 0 1px 0 #ffffff;
             }
 
             .service-card:active {
-                background: #f9f9f9;
-                border-color: #1a1a1a;
+                background: #fee287;
+                border-color: #c2762b;
             }
 
             .arrow {
-                opacity: 0.5;
+                opacity: 0.7;
             }
         }
 
         @media (max-width: 400px) {
-            .card-content {
-                padding: 18px 16px;
+            .service-card {
+                padding: 12px 12px;
             }
 
             .service-title {
-                font-size: 1.25rem;
+                font-size: 14px;
             }
 
-            .service-subtitle {
-                font-size: 0.9rem;
+            .badge {
+                padding: 2px 8px;
+                font-size: 9px;
             }
         }
 
         @media (min-width: 601px) and (max-width: 900px) {
             .service-title {
-                font-size: 1.5rem;
+                font-size: 16px;
             }
         }
 
-        @media (hover: hover) {
-            .service-card:hover {
-                border-color: #1a1a1a;
-                background: #ffffff;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            }
-        }
-
+        /* Фокус для доступности */
         .service-card:focus-visible {
-            outline: 3px solid #1a1a1a;
-            outline-offset: 3px;
+            outline: 2px solid #c2762b;
+            outline-offset: 2px;
         }
 
+        /* Классы device (оставлены для JS) */
         body.device-mobile .service-card:hover {
-            transform: none;
+            background: #ffffff;
+            border-color: #8ba0bc;
         }
     </style>
 </head>
 <body>
-    
-<!-- === ПРОВЕРКА АВТОРИЗАЦИИ (ДОБАВЛЕНО ТОЛЬКО ЭТО) === -->
-<script type="text/javascript">
-    if (sessionStorage.getItem('auth') !== 'ok') {
-        window.location.href = 'login.html';
-    }
-</script>
-    <!-- === КОНЕЦ ПРОВЕРКИ === -->
-    
-<div class="container">
+
+<div class="portal-container">
     <h1>Доступные сервисы</h1>
 
     <div class="services">
@@ -260,15 +268,13 @@
            target="_blank" 
            rel="noopener noreferrer"
            onclick="handleNavigation(event, 'radar')">
-            <div class="card-content">
-                <div class="service-title">Радар ДМРЛ-С</div>
-                <div class="service-subtitle">
-                    Радарный комплекс ДМРЛ, Центральная Аэрологическая Обсерватория, ПАО «НПО Алмаз»
-                </div>
-                <div class="service-meta">
-                    <span class="badge">метеолокатор</span>
-                    <span class="arrow">→</span>
-                </div>
+            <div class="service-title">Радар ДМРЛ-С</div>
+            <div class="service-subtitle">
+                Радарный комплекс ДМРЛ, Центральная Аэрологическая Обсерватория, ПАО «НПО Алмаз»
+            </div>
+            <div class="service-meta">
+                <span class="badge">метеолокатор</span>
+                <span class="arrow">→</span>
             </div>
         </a>
 
@@ -278,15 +284,13 @@
            target="_blank" 
            rel="noopener noreferrer"
            onclick="handleNavigation(event, 'vaisala')">
-            <div class="card-content">
-                <div class="service-title">Грозопеленгация Vaisala</div>
-                <div class="service-subtitle">
-                    Глобальная сеть GLD360 и NLDN — мониторинг грозовой активности в реальном времени
-                </div>
-                <div class="service-meta">
-                    <span class="badge">грозопеленгатор</span>
-                    <span class="arrow">→</span>
-                </div>
+            <div class="service-title">Грозопеленгация Vaisala</div>
+            <div class="service-subtitle">
+                Глобальная сеть GLD360 и NLDN — мониторинг грозовой активности в реальном времени
+            </div>
+            <div class="service-meta">
+                <span class="badge">грозопеленгатор</span>
+                <span class="arrow">→</span>
             </div>
         </a>
 
@@ -296,15 +300,13 @@
            target="_blank" 
            rel="noopener noreferrer"
            onclick="handleNavigation(event, 'model')">
-            <div class="card-content">
-                <div class="service-title">Метеорологическая модель</div>
-                <div class="service-subtitle">
-                    Расчёт возможности возникновения атмосферных явлений по метеорологическим параметрам. Конвертеры метеорологических значений
-                </div>
-                <div class="service-meta">
-                    <span class="badge">прогностическая модель</span>
-                    <span class="arrow">→</span>
-                </div>
+            <div class="service-title">Метеорологическая модель</div>
+            <div class="service-subtitle">
+                Расчёт возможности возникновения атмосферных явлений по метеорологическим параметрам. Конвертеры метеорологических значений
+            </div>
+            <div class="service-meta">
+                <span class="badge">прогностическая модель</span>
+                <span class="arrow">→</span>
             </div>
         </a>
 
@@ -314,15 +316,13 @@
            target="_blank" 
            rel="noopener noreferrer"
            onclick="handleNavigation(event, 'nexrad')">
-            <div class="card-content">
-                <div class="service-title">Карта радаров NEXRAD</div>
-                <div class="service-subtitle">
-                    Интерактивное отображение данных с сети доплеровских радаров NOAA (NEXRAD) по территории США. Осадки, отражаемость, опасные явления в реальном времени
-                </div>
-                <div class="service-meta">
-                    <span class="badge">радарная сеть</span>
-                    <span class="arrow">→</span>
-                </div>
+            <div class="service-title">Карта радаров NEXRAD</div>
+            <div class="service-subtitle">
+                Интерактивное отображение данных с сети доплеровских радаров NOAA (NEXRAD) по территории США
+            </div>
+            <div class="service-meta">
+                <span class="badge">радарная сеть</span>
+                <span class="arrow">→</span>
             </div>
         </a>
 
@@ -332,39 +332,35 @@
            target="_blank" 
            rel="noopener noreferrer"
            onclick="handleNavigation(event, 'kaz-radar')">
-            <div class="card-content">
-                <div class="service-title">Статичное изображение ДМРЛ KZ</div>
-                <div class="service-subtitle">
-                    Статичные изображения радаров Казахстана в мм/ч. Торгай, Балхаш, Талдыкорган — актуальные снимки отражаемости
-                </div>
-                <div class="service-meta">
-                    <span class="badge">радары KZ</span>
-                    <span class="arrow">→</span>
-                </div>
+            <div class="service-title">Статичное изображение ДМРЛ KZ</div>
+            <div class="service-subtitle">
+                Статичные изображения радаров Казахстана в мм/ч. Торгай, Балхаш, Талдыкорган
+            </div>
+            <div class="service-meta">
+                <span class="badge">радары KZ</span>
+                <span class="arrow">→</span>
             </div>
         </a>
 
-        <!-- 6. Данные по метеостанциям со всего мира (НОВАЯ) -->
+        <!-- 6. Данные по метеостанциям со всего мира -->
         <a class="service-card" 
            href="https://station-data-production.up.railway.app/" 
            target="_blank" 
            rel="noopener noreferrer"
            onclick="handleNavigation(event, 'stations')">
-            <div class="card-content">
-                <div class="service-title">Данные по метеостанциям со всего мира</div>
-                <div class="service-subtitle">
-                    Фактические данные с метеостанций со всего мира: температура, ветер, направление ветра, точка росы, атмосферное давление
-                </div>
-                <div class="service-meta">
-                    <span class="badge">наблюдения</span>
-                    <span class="arrow">→</span>
-                </div>
+            <div class="service-title">Данные по метеостанциям со всего мира</div>
+            <div class="service-subtitle">
+                Фактические данные: температура, ветер, направление ветра, точка росы, атмосферное давление
+            </div>
+            <div class="service-meta">
+                <span class="badge">наблюдения</span>
+                <span class="arrow">→</span>
             </div>
         </a>
     </div>
 
     <div class="footer">
-        метеорологический портал
+        метеорологический портал · office 2010 blue
     </div>
 </div>
 
@@ -376,11 +372,8 @@
         const isMobile = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
         const isTablet = /iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk|Kindle|Nexus 7|Nexus 10|KFAPWI/i.test(ua) || 
                          (/(iPad)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
-        const isIOS = /iPhone|iPad|iPod/i.test(ua);
-        const isAndroid = /Android/i.test(ua);
         
         let deviceType = 'desktop';
-        
         if (isTablet) {
             deviceType = 'tablet';
             body.classList.add('device-tablet');
@@ -392,43 +385,38 @@
             body.classList.add('device-desktop');
         }
         
-        if (isIOS) body.classList.add('device-ios');
-        if (isAndroid) body.classList.add('device-android');
-        
+        // Легкая обратная связь при клике
         window.handleNavigation = function(event, service) {
             const card = event.currentTarget;
-            card.style.opacity = '0.85';
-            setTimeout(() => { card.style.opacity = ''; }, 150);
+            card.style.transition = 'none';
+            card.style.background = '#fee287';
+            card.style.borderColor = '#c2762b';
+            setTimeout(() => { 
+                card.style.background = ''; 
+                card.style.borderColor = '';
+                card.style.transition = '';
+            }, 100);
             console.log(`[Метеопортал] Переход на сервис: ${service} (${deviceType})`);
         };
         
+        // Для мобильных убираем hover-эффекты
         if (deviceType === 'mobile' || deviceType === 'tablet') {
             const style = document.createElement('style');
             style.textContent = `
                 .service-card:hover {
-                    transform: none !important;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
-                    border-color: #e0e0e0 !important;
+                    background: #ffffff !important;
+                    border-color: #8ba0bc !important;
+                    box-shadow: inset 0 1px 0 #ffffff !important;
                 }
                 .service-card:active {
-                    background: #f9f9f9;
-                    border-color: #1a1a1a;
+                    background: #fee287 !important;
+                    border-color: #c2762b !important;
                 }
             `;
             document.head.appendChild(style);
         }
-
-        if (window.innerWidth < 380) {
-            body.style.padding = '12px';
-        }
     })();
 </script>
 
-<noscript>
-    <style>
-        .service-card { cursor: pointer; }
-    </style>
-</noscript>
-
 </body>
-</html>
+</html> 
